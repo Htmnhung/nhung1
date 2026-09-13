@@ -1,0 +1,160 @@
+@page
+@attribute [Authorize(Roles = "Companies")]
+@{
+    ViewData["Title"] = "Thông tin cửa hàng";
+}
+
+<div id="app" v-cloak>
+    <div class="row">
+        <div class="col-12">
+            <div class="grid-container">
+                <div ref="mainGridRef"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" ref="mainModalRef" id="MainModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ state.mainTitle }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" v-model="state.id" id="Id" name="Id" />
+                    <form id="MainForm">
+                        <div class="row mb-0">
+                            <!-- Main Info -->
+                            <div class="col-md-12">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h5>Thông tin chính</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label for="Name">Tên cửa hàng / Công ty</label>
+                                                <input ref="nameRef" v-model="state.name" type="text" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.name }}</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="Currency">Tiền tệ</label>
+                                                <input ref="currencyRef" v-model="state.currency" type="text" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.currency }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-12">
+                                                <label for="Description">Mô tả cửa hàng</label>
+                                                <textarea ref="descriptionRef" v-model="state.description" class="form-control" rows="3"></textarea>
+                                                <label class="text-danger">{{ state.errors.description }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <!-- Address -->
+                            <div class="col-md-12">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h5>Địa chỉ</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label for="Street">Đường phố</label>
+                                                <input ref="streetRef" v-model="state.street" type="text" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.street }}</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="City">Thành phố</label>
+                                                <input ref="cityRef" v-model="state.city" type="text" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.city }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label for="State">Tỉnh / Bang</label>
+                                                <input ref="stateRef" v-model="state.state" type="text" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.state }}</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="ZipCode">Mã bưu điện</label>
+                                                <input ref="zipCodeRef" v-model="state.zipCode" type="text" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.zipCode }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label for="Country">Quốc gia</label>
+                                                <input ref="countryRef" v-model="state.country" type="text" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.country }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <!-- Communication -->
+                            <div class="col-md-12">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h5>Thông tin liên hệ</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label for="PhoneNumber">Số điện thoại</label>
+                                                <input ref="phoneNumberRef" v-model="state.phoneNumber" type="text" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.phoneNumber }}</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="FaxNumber">Số Fax</label>
+                                                <input ref="faxNumberRef" v-model="state.faxNumber" type="text" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.faxNumber }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <label for="EmailAddress">Địa chỉ Email</label>
+                                                <input ref="emailAddressRef" v-model="state.emailAddress" type="email" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.emailAddress }}</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="Website">Website</label>
+                                                <input ref="websiteRef" v-model="state.website" type="url" class="form-control" placeholder="">
+                                                <label class="text-danger">{{ state.errors.website }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button"
+                            id="MainSaveButton"
+                            class="btn"
+                            v-bind:class="state.deleteMode ? 'btn-danger' : 'btn-primary'"
+                            v-on:click="handler.handleSubmit"
+                            v-bind:disabled="state.isSubmitting">
+                        <span class="spinner-border spinner-border-sm me-2" v-if="state.isSubmitting" role="status" aria-hidden="true"></span>
+                        <span v-if="!state.isSubmitting">{{ state.deleteMode ? 'Xóa' : 'Lưu' }}</span>
+                        <span v-else>{{ state.deleteMode ? 'Đang xóa...' : 'Đang lưu...' }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/FrontEnd/Pages/Companies/MyCompany.cshtml.js"></script>
+}

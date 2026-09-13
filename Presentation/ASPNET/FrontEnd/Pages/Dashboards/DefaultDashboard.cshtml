@@ -1,0 +1,101 @@
+@page
+@attribute [Authorize(Roles = "Dashboards")]
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div id="app" v-cloak>
+    <div class="form-card" id="formcard">
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-6 col-xl-6">
+                    <div class="bg-white rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
+                        <i class="fas fa-chart-line fa-3x" style="color: #E94649;"></i>
+                        <div class="ms-3">
+                            <p class="mb-2 font-weight-bold text-muted">Số lượng bán hàng</p>
+                            <h6 class="mb-0 text-end font-weight-bold"><span ref="cardSalesQtyRef"></span> SP</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-6">
+                    <div class="bg-white rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
+                        <i class="fas fa-truck fa-3x" style="color: #C4C24A;"></i>
+                        <div class="ms-3">
+                            <p class="mb-2 font-weight-bold text-muted">Số lượng xuất kho</p>
+                            <h6 class="mb-0 text-end font-weight-bold"><span ref="cardDeliveryOrderQtyRef"></span> SP</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-white text-center rounded p-4 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0 font-weight-bold">Bán hàng theo nhóm khách hàng</h6>
+                            <a href="/SalesReports/SalesReportList" class="text-primary font-weight-bold">Chi tiết</a>
+                        </div>
+                        <div ref="customerGroupChartRef" align="center"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-white text-center rounded p-4 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0 font-weight-bold">Bán hàng theo loại khách hàng</h6>
+                            <a href="/SalesReports/SalesReportList" class="text-primary font-weight-bold">Chi tiết</a>
+                        </div>
+                        <div ref="customerCategoryChartRef" align="center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-12 col-xl-12">
+                    <div class="bg-white text-center rounded p-4 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0 font-weight-bold">Đơn hàng bán gần đây</h6>
+                            <a href="/SalesOrders/SalesOrderList" class="text-primary font-weight-bold">Xem tất cả</a>
+                        </div>
+                        <div ref="salesOrderGridRef" align="center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-12 col-xl-12">
+                    <div class="bg-white text-center rounded p-4 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0 font-weight-bold">Số lượng tồn kho sản phẩm thiết bị di động</h6>
+                            <a href="/StockReports/StockReportList" class="text-primary font-weight-bold">Báo cáo tồn kho</a>
+                        </div>
+                        <div ref="stockChartRef" align="center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4 mb-4">
+                <div class="col-sm-12 col-xl-12">
+                    <div class="bg-white text-center rounded p-4 shadow-sm">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0 font-weight-bold">Biến động giao dịch kho gần đây</h6>
+                            <a href="/StockReports/StockReportList" class="text-primary font-weight-bold">Báo cáo giao dịch</a>
+                        </div>
+                        <div ref="inventoryTransactionGridRef" align="center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/FrontEnd/Pages/Dashboards/DefaultDashboard.cshtml.js"></script>
+}
